@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from your_card_code import validate_card, generate_card
+import os
 
 app = Flask(__name__)
 
@@ -19,4 +20,7 @@ def generate():
     return jsonify({"card": card})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
