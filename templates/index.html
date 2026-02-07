@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit Card Validator & Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Credit Card Project</h1>
+
+    <div class="card">
+        <h2>Validate Credit Card</h2>
+        <input type="text" id="validateInput" placeholder="Enter card number">
+        <button onclick="validateCard()">Validate</button>
+        <p id="validateResult"></p>
+    </div>
+
+    <div class="card">
+        <h2>Generate Credit Card</h2>
+        <select id="cardType">
+            <option>Visa</option>
+            <option>Visa Debit</option>
+            <option>Mastercard</option>
+            <option>American Express</option>
+            <option>Discover</option>
+            <option>UnionPay</option>
+            <option>JCB</option>
+        </select>
+        <button onclick="generateCard()">Generate</button>
+        <p id="generateResult"></p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
