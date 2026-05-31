@@ -3,53 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Card Validator & Generator</title>
-
+    <title>Credit Card Validator & Generator | Secure Card Tools</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>💳 Credit Card Toolkit</h1>
+            <p>Validate & Generate Test Card Numbers</p>
+        </header>
 
-<div class="container">
-    <h1>Credit Card Validator & Generator</h1>
+        <!-- Validation Section -->
+        <div class="card validator-card">
+            <div class="card-header">
+                <span class="icon">🔍</span>
+                <h2>Validate Card Number</h2>
+            </div>
+            
+            <div class="card-visual" id="cardVisual">
+                <div class="credit-card">
+                    <div class="card-chip">💳</div>
+                    <div class="card-number" id="displayCardNumber">•••• •••• •••• ••••</div>
+                    <div class="card-details">
+                        <div class="card-issuer" id="cardIssuer">Card Issuer</div>
+                    </div>
+                </div>
+            </div>
 
-    <div class="card">
-        <h2>Validate Credit Card</h2>
+            <div class="input-group">
+                <input type="text" id="validateInput" placeholder="Enter card number (e.g., 4111111111111111)" maxlength="19">
+                <button onclick="validateCard()" id="validateBtn">Validate Card</button>
+            </div>
+            
+            <div id="validateResult" class="result"></div>
+        </div>
 
-        <input
-            type="text"
-            id="validateInput"
-            placeholder="Enter card number">
+        <!-- Generation Section -->
+        <div class="card generator-card">
+            <div class="card-header">
+                <span class="icon">🎲</span>
+                <h2>Generate Test Card</h2>
+            </div>
 
-        <button onclick="validateCard()">
-            Validate
-        </button>
+            <div class="input-group">
+                <select id="cardType">
+                    {% for card in card_types %}
+                    <option value="{{ card }}">{{ card }}</option>
+                    {% endfor %}
+                </select>
+                <button onclick="generateCard()" id="generateBtn">Generate Card</button>
+            </div>
+            
+            <div id="generateResult" class="result"></div>
+            
+            <div class="info-note">
+                ℹ️ These are test numbers for development purposes only
+            </div>
+        </div>
 
-        <p id="validateResult"></p>
+        <!-- Quick Tips -->
+        <div class="tips-card">
+            <h3>📌 Quick Tips</h3>
+            <ul>
+                <li>Visa starts with 4</li>
+                <li>Mastercard starts with 51-55 or 2221-2720</li>
+                <li>Amex starts with 34 or 37 (15 digits)</li>
+                <li>Discover starts with 6011, 65, or 644-649</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>Generate Credit Card</h2>
-
-        <select id="cardType">
-            <option>Visa</option>
-            <option>Visa Debit</option>
-            <option>Mastercard</option>
-            <option>American Express</option>
-            <option>Discover</option>
-            <option>UnionPay</option>
-            <option>JCB</option>
-        </select>
-
-        <button onclick="generateCard()">
-            Generate
-        </button>
-
-        <p id="generateResult"></p>
-    </div>
-
-</div>
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
