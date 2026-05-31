@@ -100,16 +100,30 @@ def card_category(number):
 # -----------------------------
 def validate_card(number):
     if not number.isdigit():
-        return "Invalid input"
+        return {
+            "valid": False,
+            "message": "Invalid input"
+        }
 
     if not luhn_checksum(number):
-        return "Invalid card"
+        return {
+            "valid": False,
+            "message": "Invalid card"
+        }
 
     issuer = identify_card(number)
-    if not issuer:
-        return "Invalid card"
 
-    return (card_category(number), issuer)
+    if not issuer:
+        return {
+            "valid": False,
+            "message": "Invalid card"
+        }
+
+    return {
+        "valid": True,
+        "category": card_category(number),
+        "issuer": issuer
+    }
 
 
 # -----------------------------
