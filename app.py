@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from your_card_code import validate_card, generate_card
+from credit_card_project import validate_card, generate_card
 import os
 
 app = Flask(__name__)
@@ -8,16 +8,29 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+
 @app.route("/validate", methods=["POST"])
 def validate():
     data = request.get_json() or {}
-    return jsonify(validate_card(data.get("number", "")))
+    number = data.get("number", "")
+
+    result = validate_card(number)
+
+    if isinstance(result, dict):
+        return jsonify(result)
+
+    return jsonify({"result": result})
+
 
 @app.route("/generate", methods=["POST"])
 def generate():
     data = request.get_json() or {}
-    card = generate_card(data.get("cardType", ""))
+    card_type = data.get("cardType", "")
+
+    card = generate_card(card_type)
+
     return jsonify({"card": card})
+
 
 if __name__ == "__main__":
     app.run(
