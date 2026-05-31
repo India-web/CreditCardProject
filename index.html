@@ -5,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card Validator & Generator</title>
 
-    <!-- GitHub Pages compatible CSS path -->
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
-    <h1>Credit Card Project</h1>
+    <h1>Credit Card Validator & Generator</h1>
 
     <div class="card">
         <h2>Validate Credit Card</h2>
-        <input type="text" id="validateInput" placeholder="Enter card number">
-        <button onclick="validateCard()">Validate</button>
+
+        <input
+            type="text"
+            id="validateInput"
+            placeholder="Enter card number">
+
+        <button onclick="validateCard()">
+            Validate
+        </button>
+
         <p id="validateResult"></p>
     </div>
 
     <div class="card">
         <h2>Generate Credit Card</h2>
+
         <select id="cardType">
             <option>Visa</option>
             <option>Visa Debit</option>
@@ -31,13 +39,17 @@
             <option>UnionPay</option>
             <option>JCB</option>
         </select>
-        <button onclick="generateCard()">Generate</button>
+
+        <button onclick="generateCard()">
+            Generate
+        </button>
+
         <p id="generateResult"></p>
     </div>
+
 </div>
 
-<!-- GitHub Pages compatible JS path -->
-<script src="static/script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
