@@ -13,7 +13,7 @@ def index():
 @app.route("/validate", methods=["POST"])
 def validate():
     data = request.get_json() or {}
-    number = data.get("number", "").replace(" ", "")  # Remove spaces
+    number = data.get("number", "").replace(" ", "")
     
     if not number:
         return jsonify({"valid": False, "message": "Please enter a card number"})
@@ -49,14 +49,12 @@ def generate():
     
     return jsonify({"card": None, "error": "Could not generate card"})
 
-@app.route("/card_types", methods=["GET"])
-def get_card_types():
-    types = sorted(set([card[0] for card in CARD_TABLE]))
-    return jsonify({"types": types})
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"status": "healthy"}), 200
 
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
-        port=int(os.environ.get("PORT", 5000)),
-        debug=False
+        port=int(os.environ.get("PORT", 5000))
     )
